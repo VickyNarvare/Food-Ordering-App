@@ -5,8 +5,10 @@
 const promoCodes = {
     'SAVE10': { discount: 10, type: 'percentage' },
     'SAVE20': { discount: 20, type: 'percentage' },
-    'FLAT5': { discount: 5, type: 'fixed' },
-    'FIRST': { discount: 15, type: 'percentage' }
+    'FLAT400': { discount: 400, type: 'fixed' },
+    'FIRST': { discount: 15, type: 'percentage' },
+    'WEEKEND20': { discount: 20, type: 'percentage' },
+    'HAPPY15': { discount: 15, type: 'percentage' }
 };
 
 // Favorites Management
@@ -70,7 +72,7 @@ function applyPromoCode(code) {
         discount = promo.discount;
     }
     
-    return { success: true, discount: discount.toFixed(2), code: code.toUpperCase() };
+    return { success: true, discount: Math.round(discount), code: code.toUpperCase() };
 }
 
 // Sort menu items
@@ -166,13 +168,13 @@ function printOrder(orderId) {
                         <tr>
                             <td>${item.name}</td>
                             <td>${item.quantity}</td>
-                            <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                            <td>₹${(item.price * item.quantity).toLocaleString('en-IN')}</td>
                         </tr>
                     `).join('')}
-                    <tr><td colspan="2"><strong>Subtotal:</strong></td><td>$${order.subtotal}</td></tr>
-                    ${order.discount && parseFloat(order.discount) > 0 ? `<tr><td colspan="2"><strong>Discount (${order.promoCode || 'Promo'}):</strong></td><td style="color: #28a745;">-$${order.discount}</td></tr>` : ''}
-                    <tr><td colspan="2"><strong>Tax:</strong></td><td>$${order.tax}</td></tr>
-                    <tr class="total"><td colspan="2"><strong>Grand Total:</strong></td><td>$${order.totalPrice}</td></tr>
+                    <tr><td colspan="2"><strong>Subtotal:</strong></td><td>₹${parseFloat(order.subtotal.replace(/,/g, '')).toLocaleString('en-IN')}</td></tr>
+                    ${order.discount && parseFloat(order.discount.toString().replace(/,/g, '')) > 0 ? `<tr><td colspan="2"><strong>Discount (${order.promoCode || 'Promo'}):</strong></td><td style="color: #28a745;">-₹${parseFloat(order.discount.toString().replace(/,/g, '')).toLocaleString('en-IN')}</td></tr>` : ''}
+                    <tr><td colspan="2"><strong>Tax:</strong></td><td>₹${parseFloat(order.tax.toString().replace(/,/g, '')).toLocaleString('en-IN')}</td></tr>
+                    <tr class="total"><td colspan="2"><strong>Grand Total:</strong></td><td>₹${parseFloat(order.totalPrice.toString().replace(/,/g, '')).toLocaleString('en-IN')}</td></tr>
                 </table>
             </body>
         </html>

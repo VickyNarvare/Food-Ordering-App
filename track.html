@@ -142,28 +142,28 @@
                             ${order.items.map(item => `
                                 <div class="order-item-summary">
                                     <span>${item.name} x${item.quantity}</span>
-                                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                    <span>₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
                                 </div>
                             `).join('')}
                         </div>
                         <div class="order-total-summary">
                             <div class="total-row">
                                 <span>Subtotal:</span>
-                                <span>$${order.subtotal}</span>
+                                <span>₹${parseFloat(order.subtotal.toString().replace(/,/g, '') || 0).toLocaleString('en-IN')}</span>
                             </div>
-                            ${order.discount && parseFloat(order.discount) > 0 ? `
+                            ${order.discount && parseFloat(order.discount.toString().replace(/,/g, '') || 0) > 0 ? `
                                 <div class="total-row">
                                     <span>Discount (${order.promoCode || 'Promo'}):</span>
-                                    <span style="color: var(--success-color);">-$${order.discount}</span>
+                                    <span style="color: var(--success-color);">-₹${parseFloat(order.discount.toString().replace(/,/g, '') || 0).toLocaleString('en-IN')}</span>
                                 </div>
                             ` : ''}
                             <div class="total-row">
                                 <span>Tax:</span>
-                                <span>$${order.tax}</span>
+                                <span>₹${parseFloat(order.tax.toString().replace(/,/g, '') || 0).toLocaleString('en-IN')}</span>
                             </div>
                             <div class="total-row grand-total">
                                 <span>Total:</span>
-                                <span>$${order.totalPrice}</span>
+                                <span>₹${parseFloat(order.totalPrice.toString().replace(/,/g, '') || 0).toLocaleString('en-IN')}</span>
                             </div>
                         </div>
                         <div class="delivery-address">

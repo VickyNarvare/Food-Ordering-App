@@ -25,8 +25,51 @@
     <main class="main">
         <div class="container">
             <section class="hero">
-                <h2>Welcome to Foodie Delight</h2>
-                <p>Delicious food delivered to your door</p>
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">Delicious Food <span class="gradient-text">Delivered</span> to Your Door</h1>
+                        <p class="hero-subtitle">Experience the best flavors in town. Order from our extensive menu and get fresh, hot meals delivered within 30 minutes.</p>
+                        <div class="hero-buttons">
+                            <button class="hero-btn primary" onclick="scrollToMenu()">
+                                <i class='bx bx-restaurant'></i> Order Now
+                            </button>
+                            <button class="hero-btn secondary" onclick="document.getElementById('cartBtn').click()">
+                                <i class='bx bx-cart'></i> View Cart
+                            </button>
+                        </div>
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">500+</div>
+                                <div class="stat-label">Happy Customers</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">30min</div>
+                                <div class="stat-label">Fast Delivery</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">4.8⭐</div>
+                                <div class="stat-label">Average Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="hero-image-container">
+                            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=600&fit=crop" alt="Delicious Food" />
+                            <div class="floating-badge badge-1">
+                                <i class='bx bx-star'></i>
+                                <span>4.8 Rating</span>
+                            </div>
+                            <div class="floating-badge badge-2">
+                                <i class='bx bx-time-five'></i>
+                                <span>30 Min</span>
+                            </div>
+                            <div class="floating-badge badge-3">
+                                <i class='bx bx-gift'></i>
+                                <span>20% Off</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <section class="filters-section">
@@ -44,10 +87,10 @@
                     </div>
                     <div class="sort-price-filters">
                         <div class="price-range-filter">
-                            <label>Price Range: $<span id="minPriceVal">0</span> - $<span id="maxPriceVal">20</span></label>
+                            <label>Price Range: ₹<span id="minPriceVal">0</span> - ₹<span id="maxPriceVal">1600</span></label>
                             <div class="range-inputs">
-                                <input type="range" id="minPrice" min="0" max="20" value="0" step="1">
-                                <input type="range" id="maxPrice" min="0" max="20" value="20" step="1">
+                                <input type="range" id="minPrice" min="0" max="1600" value="0" step="50">
+                                <input type="range" id="maxPrice" min="0" max="1600" value="1600" step="50">
                             </div>
                         </div>
                     </div>
@@ -61,7 +104,7 @@
             </section>
             
             <!-- All Menu Items -->
-            <section class="section-title">
+            <section class="section-title" id="menuSection">
                 <h3>All Menu Items</h3>
             </section>
 
@@ -170,7 +213,7 @@
         </div>
         <div class="cart-footer">
             <div class="cart-total">
-                <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
             </div>
             <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
         </div>

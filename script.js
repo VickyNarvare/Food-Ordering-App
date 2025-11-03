@@ -5,7 +5,7 @@ const menuItems = [
         name: "Margherita Pizza",
         category: "pizza",
         description: "Classic pizza with tomato sauce, mozzarella, and fresh basil",
-        price: 12.99,
+        price: 1040,
         image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&h=400&fit=crop",
         rating: 4.5,
         reviews: 128,
@@ -17,7 +17,7 @@ const menuItems = [
         name: "Pepperoni Pizza",
         category: "pizza",
         description: "Traditional pizza topped with spicy pepperoni and cheese",
-        price: 14.99,
+        price: 1200,
         image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&h=400&fit=crop",
         rating: 4.8,
         reviews: 203,
@@ -29,7 +29,7 @@ const menuItems = [
         name: "BBQ Chicken Pizza",
         category: "pizza",
         description: "Smoky BBQ sauce, grilled chicken, red onions, and mozzarella",
-        price: 16.99,
+        price: 1360,
         image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&h=400&fit=crop",
         rating: 4.7,
         reviews: 156,
@@ -41,7 +41,7 @@ const menuItems = [
         name: "Veggie Supreme Pizza",
         category: "pizza",
         description: "Loaded with bell peppers, mushrooms, olives, and onions",
-        price: 15.99,
+        price: 1280,
         image: "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=600&h=400&fit=crop",
         rating: 4.4,
         reviews: 89,
@@ -53,7 +53,7 @@ const menuItems = [
         name: "Classic Burger",
         category: "burgers",
         description: "Juicy beef patty with lettuce, tomato, pickles, and special sauce",
-        price: 9.99,
+        price: 800,
         image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&h=400&fit=crop",
         rating: 4.6,
         reviews: 312,
@@ -65,7 +65,7 @@ const menuItems = [
         name: "Cheese Burger",
         category: "burgers",
         description: "Classic burger with melted cheese and all the fixings",
-        price: 10.99,
+        price: 880,
         image: "https://images.unsplash.com/photo-1542574271-7f3b92e6c821?w=600&h=400&fit=crop",
         rating: 4.7,
         reviews: 278,
@@ -77,7 +77,7 @@ const menuItems = [
         name: "Bacon Deluxe Burger",
         category: "burgers",
         description: "Premium burger with crispy bacon, cheese, and special sauce",
-        price: 12.99,
+        price: 1040,
         image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&h=400&fit=crop",
         rating: 4.9,
         reviews: 445,
@@ -89,7 +89,7 @@ const menuItems = [
         name: "Chicken Burger",
         category: "burgers",
         description: "Grilled chicken breast with lettuce, mayo, and pickles",
-        price: 11.99,
+        price: 960,
         image: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=600&h=400&fit=crop",
         rating: 4.5,
         reviews: 167,
@@ -101,7 +101,7 @@ const menuItems = [
         name: "Cola",
         category: "drinks",
         description: "Refreshing cola drink",
-        price: 2.99,
+        price: 240,
         image: "https://images.unsplash.com/photo-1554866585-cd94860890b7?w=600&h=400&fit=crop",
         rating: 4.2,
         reviews: 89,
@@ -113,7 +113,7 @@ const menuItems = [
         name: "Orange Juice",
         category: "drinks",
         description: "Freshly squeezed orange juice",
-        price: 3.99,
+        price: 320,
         image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=600&h=400&fit=crop",
         rating: 4.6,
         reviews: 124,
@@ -125,7 +125,7 @@ const menuItems = [
         name: "Iced Coffee",
         category: "drinks",
         description: "Chilled coffee with ice and cream",
-        price: 4.99,
+        price: 400,
         image: "https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=600&h=400&fit=crop",
         rating: 4.8,
         reviews: 198,
@@ -137,7 +137,7 @@ const menuItems = [
         name: "Lemonade",
         category: "drinks",
         description: "Fresh lemonade with a hint of mint",
-        price: 3.49,
+        price: 280,
         image: "https://images.unsplash.com/photo-1575596510825-f748919a2bf7?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687",
         rating: 4.4,
         reviews: 76,
@@ -149,7 +149,7 @@ const menuItems = [
         name: "Chocolate Cake",
         category: "desserts",
         description: "Rich and moist chocolate cake with frosting",
-        price: 6.99,
+        price: 560,
         image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop",
         rating: 4.9,
         reviews: 234,
@@ -161,7 +161,7 @@ const menuItems = [
         name: "Ice Cream Sundae",
         category: "desserts",
         description: "Vanilla ice cream with chocolate sauce and toppings",
-        price: 5.99,
+        price: 480,
         image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&h=400&fit=crop",
         rating: 4.7,
         reviews: 187,
@@ -173,7 +173,7 @@ const menuItems = [
         name: "Apple Pie",
         category: "desserts",
         description: "Homemade apple pie with a flaky crust",
-        price: 7.99,
+        price: 640,
         image: "https://images.unsplash.com/photo-1621303837174-89787a7d4729?w=600&h=400&fit=crop",
         rating: 4.6,
         reviews: 145,
@@ -185,7 +185,7 @@ const menuItems = [
         name: "Cheesecake",
         category: "desserts",
         description: "Creamy New York style cheesecake",
-        price: 8.99,
+        price: 720,
         image: "https://images.unsplash.com/photo-1524351199678-941a58a3df50?w=600&h=400&fit=crop",
         rating: 4.8,
         reviews: 289,
@@ -203,7 +203,7 @@ function getFilteredMenu() {
     const activeCategory = document.querySelector('.filter-btn.active')?.dataset.category || 'all';
     const searchTerm = document.getElementById('searchInput')?.value.toLowerCase() || '';
     const minPrice = parseFloat(document.getElementById('minPrice')?.value || 0);
-    const maxPrice = parseFloat(document.getElementById('maxPrice')?.value || 20);
+    const maxPrice = parseFloat(document.getElementById('maxPrice')?.value || 1600);
     
     // Category filter
     if (activeCategory !== 'all') {
@@ -273,7 +273,7 @@ function renderMenu(items, targetId = 'menuGrid') {
                 ` : ''}
                 <p class="menu-item-description">${item.description}</p>
                 <div class="menu-item-footer">
-                    <span class="menu-item-price">$${item.price.toFixed(2)}</span>
+                    <span class="menu-item-price">₹${item.price.toLocaleString('en-IN')}</span>
                     <button class="add-to-cart-btn" onclick="event.stopPropagation(); addToCart(${item.id})">
                         <span>Add to Cart</span>
                     </button>
@@ -342,7 +342,7 @@ function openQuickView(itemId) {
                 ${item.deliveryTime ? `<p class="delivery-time">⏱️ Est. Delivery: ${item.deliveryTime}</p>` : ''}
                 <p class="description">${item.description}</p>
                 <div class="quick-view-price">
-                    <span class="price">$${item.price.toFixed(2)}</span>
+                    <span class="price">₹${item.price.toLocaleString('en-IN')}</span>
                     ${item.popularity ? `<span class="popularity-badge">🔥 ${item.popularity}% Popular</span>` : ''}
                 </div>
                 <div class="quick-view-actions">
@@ -407,8 +407,8 @@ function setupEventListeners() {
     
     if (minPrice && maxPrice && minPriceVal && maxPriceVal) {
         const updatePriceDisplay = () => {
-            minPriceVal.textContent = minPrice.value;
-            maxPriceVal.textContent = maxPrice.value;
+            minPriceVal.textContent = parseInt(minPrice.value).toLocaleString('en-IN');
+            maxPriceVal.textContent = parseInt(maxPrice.value).toLocaleString('en-IN');
             renderMenu(getFilteredMenu());
         };
         minPrice.addEventListener('input', updatePriceDisplay);
@@ -526,7 +526,7 @@ function updateCartUI() {
                     </div>
                     <div class="cart-item-details">
                         <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
+                        <div class="cart-item-price">₹${item.price.toLocaleString('en-IN')} each</div>
                         <div class="cart-item-controls">
                             <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">−</button>
                             <span class="item-quantity">${item.quantity}</span>
@@ -542,7 +542,7 @@ function updateCartUI() {
 
     if (cartTotal) {
         const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        cartTotal.textContent = total.toFixed(2);
+        cartTotal.textContent = total.toLocaleString('en-IN');
     }
 }
 
@@ -593,7 +593,7 @@ function loadOrderSummary() {
                 <span class="order-item-name">${item.name}</span>
                 <span class="order-item-quantity">x${item.quantity}</span>
             </div>
-            <span class="order-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
+            <span class="order-item-price">₹${(item.price * item.quantity).toLocaleString('en-IN')}</span>
         </div>
     `).join('');
 
@@ -602,9 +602,9 @@ function loadOrderSummary() {
     const tax = subtotal * 0.10; // 10% tax
     const grandTotal = subtotal + tax;
 
-    subtotalEl.textContent = subtotal.toFixed(2);
-    taxEl.textContent = tax.toFixed(2);
-    grandTotalEl.textContent = grandTotal.toFixed(2);
+    subtotalEl.textContent = subtotal.toLocaleString('en-IN');
+    taxEl.textContent = tax.toLocaleString('en-IN');
+    grandTotalEl.textContent = grandTotal.toLocaleString('en-IN');
 }
 
 // Handle order submission
@@ -652,11 +652,11 @@ async function handleOrderSubmission(e) {
             quantity: item.quantity,
             category: item.category
         })),
-        subtotal: subtotal.toFixed(2),
-        discount: appliedDiscount.toFixed(2),
+        subtotal: subtotal,
+        discount: appliedDiscount,
         promoCode: discountInfo.code || '',
-        tax: tax.toFixed(2),
-        totalPrice: totalPrice.toFixed(2),
+        tax: tax,
+        totalPrice: totalPrice,
         deliveryDetails: deliveryDetails
     };
     
@@ -737,4 +737,68 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Scroll to menu with offset
+function scrollToMenu() {
+    const menuSection = document.getElementById('menuSection');
+    if (menuSection) {
+        const headerOffset = 150; // Offset to stop a bit higher
+        const elementPosition = menuSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Combo Deal Functions
+function addComboDeal(dealType) {
+    const comboDeals = {
+        family: {
+            items: [
+                { id: 2, name: "Pepperoni Pizza", quantity: 2, price: 1200 },
+                { id: 13, name: "Coca Cola", quantity: 2, price: 320 },
+                { id: 15, name: "Chocolate Cake", quantity: 1, price: 480 }
+            ],
+            totalPrice: 2400,
+            message: "Family Combo added to cart!"
+        },
+        student: {
+            items: [
+                { id: 1, name: "Margherita Pizza", quantity: 1, price: 1040 },
+                { id: 13, name: "Coca Cola", quantity: 1, price: 320 }
+            ],
+            totalPrice: 1020,
+            message: "Student Special added to cart!"
+        }
+    };
+
+    if (!comboDeals[dealType]) {
+        showToast('Invalid deal selection', 'error');
+        return;
+    }
+
+    const deal = comboDeals[dealType];
+    
+    // Add all items from the combo to cart
+    deal.items.forEach(dealItem => {
+        // Find the actual item from menuItems
+        const actualItem = menuItems.find(item => item.id === dealItem.id);
+        if (actualItem) {
+            // Add each item with specified quantity
+            for (let i = 0; i < dealItem.quantity; i++) {
+                addToCart(dealItem.id);
+            }
+        }
+    });
+
+    showToast(deal.message, 'success');
+    
+    // Update cart UI
+    if (typeof updateCartUI === 'function') {
+        updateCartUI();
+    }
+}
 

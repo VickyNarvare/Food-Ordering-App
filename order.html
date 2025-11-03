@@ -29,11 +29,11 @@
                     <div class="order-totals">
                         <div class="total-row">
                             <span>Subtotal:</span>
-                            <span>$<span id="subtotal">0.00</span></span>
+                            <span>₹<span id="subtotal">0</span></span>
                         </div>
                         <div class="total-row">
                             <span>Tax (10%):</span>
-                            <span>$<span id="tax">0.00</span></span>
+                            <span>₹<span id="tax">0</span></span>
                         </div>
                         <div class="promo-code-section">
                             <div class="promo-input-group">
@@ -43,12 +43,12 @@
                             <div id="promoMessage" class="promo-message"></div>
                             <div class="total-row" id="discountRow" style="display: none;">
                                 <span>Discount:</span>
-                                <span style="color: var(--success-color);">-$<span id="discountAmount">0.00</span></span>
+                                <span style="color: var(--success-color);">-₹<span id="discountAmount">0</span></span>
                             </div>
                         </div>
                         <div class="total-row grand-total">
                             <span>Grand Total:</span>
-                            <span>$<span id="grandTotal">0.00</span></span>
+                            <span>₹<span id="grandTotal">0</span></span>
                         </div>
                         <div class="delivery-time-estimate">
                             <p>⏱️ Estimated delivery time: <strong id="estimatedTime">30-40 minutes</strong></p>
@@ -156,10 +156,10 @@
             if (result.success) {
                 appliedDiscount = parseFloat(result.discount);
                 appliedPromoCode = result.code;
-                messageEl.textContent = `Promo code "${result.code}" applied! Saved $${result.discount}`;
+                messageEl.textContent = `Promo code "${result.code}" applied! Saved ₹${result.discount}`;
                 messageEl.className = 'promo-message success';
                 discountRow.style.display = 'flex';
-                discountAmount.textContent = result.discount;
+                discountAmount.textContent = typeof result.discount === 'number' ? result.discount.toLocaleString('en-IN') : result.discount;
                 updateTotalsWithDiscount();
             } else {
                 appliedDiscount = 0;
@@ -180,9 +180,9 @@
             const taxEl = document.getElementById('tax');
             const grandTotalEl = document.getElementById('grandTotal');
             
-            if (subtotalEl) subtotalEl.textContent = subtotal.toFixed(2);
-            if (taxEl) taxEl.textContent = tax.toFixed(2);
-            if (grandTotalEl) grandTotalEl.textContent = grandTotal.toFixed(2);
+            if (subtotalEl) subtotalEl.textContent = subtotal.toLocaleString('en-IN');
+            if (taxEl) taxEl.textContent = tax.toLocaleString('en-IN');
+            if (grandTotalEl) grandTotalEl.textContent = grandTotal.toLocaleString('en-IN');
             
             // Store discount info for order submission
             localStorage.setItem('appliedDiscount', JSON.stringify({ discount: appliedDiscount, code: appliedPromoCode }));
