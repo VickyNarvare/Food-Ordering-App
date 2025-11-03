@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History - Food Ordering</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🍽️ Foodie Delight</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <button class="cart-btn" id="cartBtn">
+                    🛒 Cart <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h2 class="page-title">Order History</h2>
+
+            <div id="ordersList" class="orders-list">
+                <!-- Orders will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script src="features.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // Load and display orders
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrders();
+            updateCartUI();
+        });
+
+        function loadOrders() {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const ordersList = document.getElementById('ordersList');
+
+            if (orders.length === 0) {
+                ordersList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📋</div>
+                        <h3>No orders yet</h3>
+                        <p>Your order history will appear here</p>
+                        <a href="index.html" class="back-to-menu-btn">Start Ordering</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort orders by date (newest first)
+            orders.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            ordersList.innerHTML = orders.map(order => `
+                <div class="order-card">
+                    <div class="order-card-header">
+                        <div>
+                            <h3>Order #${order.orderId}</h3>
+                            <p class="order-date">${new Date(order.timestamp).toLocaleString()}</p>
+                        </div>
+                        <div class="order-actions">
+                            <button class="track-order-btn" onclick="window.location.href='track.html?id=${order.orderId}'">Track Order</button>
+                            <button class="print-order-btn" onclick="printOrder('${order.orderId}')">🖨️ Print</button>
+                        </div>
+                    </div>
+                    <div class="order-card-body">
+                        <div class="order-items-summary">
+                            ${order.items.map(item => `
+                                <div class="order-item-summary">
+                                    <span>${item.name} x${item.quantity}</span>
+                                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="order-total-summary">
+                            <div class="total-row">
+                                <span>Subtotal:</span>
+                                <span>$${order.subtotal}</span>
+                            </div>
+                            ${order.discount && parseFloat(order.discount) > 0 ? `
+                                <div class="total-row">
+                                    <span>Discount (${order.promoCode || 'Promo'}):</span>
+                                    <span style="color: var(--success-color);">-$${order.discount}</span>
+                                </div>
+                            ` : ''}
+                            <div class="total-row">
+                                <span>Tax:</span>
+                                <span>$${order.tax}</span>
+                            </div>
+                            <div class="total-row grand-total">
+                                <span>Total:</span>
+                                <span>$${order.totalPrice}</span>
+                            </div>
+                        </div>
+                        <div class="order-delivery-info">
+                            <p><strong>Delivery to:</strong> ${order.deliveryDetails.address}, ${order.deliveryDetails.city}</p>
+                            <p><strong>Phone:</strong> ${order.deliveryDetails.phone}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
+

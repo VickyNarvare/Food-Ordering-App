@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary - Food Ordering</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🍽️ Foodie Delight</h1>
+            <nav class="nav">
+                <a href="index.html" class="back-link">← Back to Menu</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h2 class="page-title">Order Summary</h2>
+
+            <div class="order-content">
+                <section class="order-summary-section">
+                    <h3>Your Order</h3>
+                    <div class="order-items" id="orderItems">
+                        <!-- Order items will be dynamically inserted here -->
+                    </div>
+                    <div class="order-totals">
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span>$<span id="subtotal">0.00</span></span>
+                        </div>
+                        <div class="total-row">
+                            <span>Tax (10%):</span>
+                            <span>$<span id="tax">0.00</span></span>
+                        </div>
+                        <div class="promo-code-section">
+                            <div class="promo-input-group">
+                                <input type="text" id="promoCode" placeholder="Enter promo code" />
+                                <button type="button" onclick="applyPromo()" class="apply-promo-btn">Apply</button>
+                            </div>
+                            <div id="promoMessage" class="promo-message"></div>
+                            <div class="total-row" id="discountRow" style="display: none;">
+                                <span>Discount:</span>
+                                <span style="color: var(--success-color);">-$<span id="discountAmount">0.00</span></span>
+                            </div>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Grand Total:</span>
+                            <span>$<span id="grandTotal">0.00</span></span>
+                        </div>
+                        <div class="delivery-time-estimate">
+                            <p>⏱️ Estimated delivery time: <strong id="estimatedTime">30-40 minutes</strong></p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="delivery-form-section">
+                    <h3>Delivery Details</h3>
+                    <form id="deliveryForm" class="delivery-form">
+                        <div class="form-group">
+                            <label for="customerName">Full Name *</label>
+                            <input type="text" id="customerName" name="customerName" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Delivery Address *</label>
+                            <textarea id="address" name="address" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required />
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="zipCode">Zip Code *</label>
+                                <input type="text" id="zipCode" name="zipCode" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="deliveryTime">Preferred Time</label>
+                                <select id="deliveryTime" name="deliveryTime">
+                                    <option value="asap">ASAP</option>
+                                    <option value="30min">30 minutes</option>
+                                    <option value="1hr">1 hour</option>
+                                    <option value="2hr">2 hours</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialInstructions">Special Instructions</label>
+                            <textarea id="specialInstructions" name="specialInstructions" rows="2" placeholder="Any special delivery instructions..."></textarea>
+                        </div>
+                        <button type="submit" class="place-order-btn" id="placeOrderBtn">
+                            Place Order
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+        <p>Placing your order...</p>
+    </div>
+
+    <script src="features.js"></script>
+    <script src="script.js"></script>
+    <script>
+        let appliedDiscount = 0;
+        let appliedPromoCode = '';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrderSummary();
+            updateDeliveryTime();
+            
+            const form = document.getElementById('deliveryForm');
+            form.addEventListener('submit', handleOrderSubmission);
+        });
+        
+        function updateDeliveryTime() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            if (cart.length === 0) return;
+            
+            const estimatedMinutes = typeof getEstimatedDeliveryTime === 'function' ? getEstimatedDeliveryTime(cart) : 30;
+            const timeRange = `${estimatedMinutes}-${estimatedMinutes + 10} minutes`;
+            const estimatedTimeEl = document.getElementById('estimatedTime');
+            if (estimatedTimeEl) estimatedTimeEl.textContent = timeRange;
+        }
+        
+        function applyPromo() {
+            const code = document.getElementById('promoCode').value;
+            const messageEl = document.getElementById('promoMessage');
+            const discountRow = document.getElementById('discountRow');
+            const discountAmount = document.getElementById('discountAmount');
+            
+            if (!code) {
+                messageEl.textContent = 'Please enter a promo code';
+                messageEl.className = 'promo-message error';
+                return;
+            }
+            
+            const result = typeof applyPromoCode === 'function' ? applyPromoCode(code) : { success: false, message: 'Function not available' };
+            if (result.success) {
+                appliedDiscount = parseFloat(result.discount);
+                appliedPromoCode = result.code;
+                messageEl.textContent = `Promo code "${result.code}" applied! Saved $${result.discount}`;
+                messageEl.className = 'promo-message success';
+                discountRow.style.display = 'flex';
+                discountAmount.textContent = result.discount;
+                updateTotalsWithDiscount();
+            } else {
+                appliedDiscount = 0;
+                messageEl.textContent = result.message || 'Invalid promo code';
+                messageEl.className = 'promo-message error';
+                discountRow.style.display = 'none';
+                updateTotalsWithDiscount();
+            }
+        }
+        
+        function updateTotalsWithDiscount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = Math.max(0, (subtotal - appliedDiscount) * 0.10);
+            const grandTotal = Math.max(0, subtotal + tax - appliedDiscount);
+            
+            const subtotalEl = document.getElementById('subtotal');
+            const taxEl = document.getElementById('tax');
+            const grandTotalEl = document.getElementById('grandTotal');
+            
+            if (subtotalEl) subtotalEl.textContent = subtotal.toFixed(2);
+            if (taxEl) taxEl.textContent = tax.toFixed(2);
+            if (grandTotalEl) grandTotalEl.textContent = grandTotal.toFixed(2);
+            
+            // Store discount info for order submission
+            localStorage.setItem('appliedDiscount', JSON.stringify({ discount: appliedDiscount, code: appliedPromoCode }));
+        }
+    </script>
+</body>
+</html>
+

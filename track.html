@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order - Food Ordering</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🍽️ Foodie Delight</h1>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">🏠 Home</a>
+                <a href="orders.html" class="nav-link">📋 Orders</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h2 class="page-title">Track Your Order</h2>
+
+            <div id="trackingContent" class="tracking-container">
+                <!-- Order tracking will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <script src="features.js"></script>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('id');
+            
+            if (orderId) {
+                loadTracking(orderId);
+            } else {
+                document.getElementById('trackingContent').innerHTML = `
+                    <div class="empty-state">
+                        <p>No order ID provided</p>
+                        <a href="orders.html">View All Orders</a>
+                    </div>
+                `;
+            }
+        });
+
+        function loadTracking(orderId) {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const order = orders.find(o => o.orderId === orderId);
+            
+            if (!order) {
+                document.getElementById('trackingContent').innerHTML = `
+                    <div class="empty-state">
+                        <p>Order not found</p>
+                        <a href="orders.html">View All Orders</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Calculate estimated delivery time
+            const orderTime = new Date(order.timestamp);
+            const estimatedDelivery = new Date(orderTime.getTime() + (parseInt(order.deliveryDetails.deliveryTime === 'asap' ? 30 : order.deliveryDetails.deliveryTime.replace(/\D/g, '')) || 30) * 60000);
+            const now = new Date();
+            
+            // Determine status
+            let status = 'preparing';
+            let statusText = 'Preparing your order';
+            let progress = 25;
+            
+            if (now >= estimatedDelivery) {
+                status = 'delivered';
+                statusText = 'Delivered';
+                progress = 100;
+            } else if (now >= new Date(orderTime.getTime() + 15 * 60000)) {
+                status = 'on-the-way';
+                statusText = 'On the way';
+                progress = 75;
+            } else if (now >= new Date(orderTime.getTime() + 10 * 60000)) {
+                status = 'ready';
+                statusText = 'Ready for pickup';
+                progress = 50;
+            }
+
+            document.getElementById('trackingContent').innerHTML = `
+                <div class="tracking-card">
+                    <div class="tracking-header">
+                        <h3>Order #${order.orderId}</h3>
+                        <p class="order-date">Placed on ${orderTime.toLocaleString()}</p>
+                    </div>
+                    <div class="tracking-status">
+                        <div class="status-indicator ${status}">
+                            <div class="status-icon">${status === 'delivered' ? '✅' : status === 'on-the-way' ? '🚗' : status === 'ready' ? '📦' : '👨‍🍳'}</div>
+                            <h2>${statusText}</h2>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${progress}%"></div>
+                        </div>
+                    </div>
+                    <div class="tracking-timeline">
+                        <div class="timeline-item ${status === 'preparing' || status === 'ready' || status === 'on-the-way' || status === 'delivered' ? 'completed' : ''}">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Order Placed</h4>
+                                <p>${orderTime.toLocaleString()}</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item ${status === 'ready' || status === 'on-the-way' || status === 'delivered' ? 'completed' : ''}">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Preparing</h4>
+                                <p>Your order is being prepared</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item ${status === 'on-the-way' || status === 'delivered' ? 'completed' : ''}">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Ready for Pickup</h4>
+                                <p>Order is ready</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item ${status === 'on-the-way' || status === 'delivered' ? 'completed' : ''}">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>On the Way</h4>
+                                <p>Out for delivery</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item ${status === 'delivered' ? 'completed' : ''}">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content">
+                                <h4>Delivered</h4>
+                                <p>${status === 'delivered' ? estimatedDelivery.toLocaleString() : 'Estimated: ' + estimatedDelivery.toLocaleString()}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-details-section">
+                        <h3>Order Details</h3>
+                        <div class="order-items-summary">
+                            ${order.items.map(item => `
+                                <div class="order-item-summary">
+                                    <span>${item.name} x${item.quantity}</span>
+                                    <span>$${(item.price * item.quantity).toFixed(2)}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="order-total-summary">
+                            <div class="total-row">
+                                <span>Subtotal:</span>
+                                <span>$${order.subtotal}</span>
+                            </div>
+                            ${order.discount && parseFloat(order.discount) > 0 ? `
+                                <div class="total-row">
+                                    <span>Discount (${order.promoCode || 'Promo'}):</span>
+                                    <span style="color: var(--success-color);">-$${order.discount}</span>
+                                </div>
+                            ` : ''}
+                            <div class="total-row">
+                                <span>Tax:</span>
+                                <span>$${order.tax}</span>
+                            </div>
+                            <div class="total-row grand-total">
+                                <span>Total:</span>
+                                <span>$${order.totalPrice}</span>
+                            </div>
+                        </div>
+                        <div class="delivery-address">
+                            <h4>Delivery Address</h4>
+                            <p>${order.deliveryDetails.customerName}</p>
+                            <p>${order.deliveryDetails.address}</p>
+                            <p>${order.deliveryDetails.city}, ${order.deliveryDetails.zipCode}</p>
+                            <p>Phone: ${order.deliveryDetails.phone}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
+
