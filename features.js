@@ -31,14 +31,10 @@ function toggleFavorite(itemId) {
     if (document.getElementById('menuGrid') && typeof getFilteredMenu === 'function' && typeof renderMenu === 'function') {
         renderMenu(getFilteredMenu());
     }
-    // Also update recently viewed and recommended if they exist
+    // Also update recently viewed if it exists
     const recentlyGrid = document.getElementById('recentlyViewedGrid');
-    const recommendedGrid = document.getElementById('recommendedGrid');
     if (recentlyGrid && typeof loadRecentlyViewed === 'function') {
         loadRecentlyViewed();
-    }
-    if (recommendedGrid && typeof loadRecommended === 'function') {
-        loadRecommended();
     }
 }
 

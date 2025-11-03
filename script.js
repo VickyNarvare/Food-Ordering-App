@@ -378,13 +378,6 @@ function loadRecentlyViewed() {
     }
 }
 
-// Load recommended items
-function loadRecommended() {
-    const recommended = [...menuItems]
-        .sort((a, b) => (b.popularity || 0) - (a.popularity || 0))
-        .slice(0, 4);
-    renderMenu(recommended, 'recommendedGrid');
-}
 
 // Setup event listeners
 function setupEventListeners() {
@@ -714,9 +707,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Render menu
     renderMenu(getFilteredMenu());
     
-    // Load recently viewed and recommended
+    // Load recently viewed
     loadRecentlyViewed();
-    loadRecommended();
     
     // Setup event listeners
     setupEventListeners();
