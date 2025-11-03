@@ -426,6 +426,11 @@ function setupEventListeners() {
         cartBtn.addEventListener('click', () => {
             cartPanel.classList.add('active');
             overlay.classList.add('active');
+            // Hide navbar when cart opens
+            const header = document.querySelector('.header');
+            if (header) {
+                header.classList.add('hidden');
+            }
         });
     }
 
@@ -547,6 +552,11 @@ function closeCartPanel() {
     const overlay = document.getElementById('overlay');
     if (cartPanel) cartPanel.classList.remove('active');
     if (overlay) overlay.classList.remove('active');
+    // Show navbar when cart closes
+    const header = document.querySelector('.header');
+    if (header) {
+        header.classList.remove('hidden');
+    }
 }
 
 // Show toast notification
