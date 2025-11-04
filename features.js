@@ -8,7 +8,8 @@ const promoCodes = {
     'FLAT400': { discount: 400, type: 'fixed' },
     'FIRST': { discount: 15, type: 'percentage' },
     'WEEKEND20': { discount: 20, type: 'percentage' },
-    'HAPPY15': { discount: 15, type: 'percentage' }
+    'HAPPY15': { discount: 15, type: 'percentage' },
+    'FIRST100': { discount: 100, type: 'percentage' }
 };
 
 // Favorites Management
