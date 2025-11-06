@@ -152,17 +152,15 @@ Modify `style.css` to customize colors, fonts, and layout. The app uses CSS vari
 ## 📝 Notes
 
 - All data is stored in browser's LocalStorage
-- No backend server is required for basic functionality
+- Fully client-side application - no backend server required
 - Images are loaded from Unsplash (external dependency)
 - The app works offline for viewing previously loaded content
 
 ## 🔮 Future Enhancements
 
 Potential features for future development:
-- Backend integration for real orders
 - User authentication
 - Payment gateway integration
-- Real-time order tracking with delivery partner API
 - Restaurant admin panel
 - Reviews and ratings system
 - Multiple restaurant support
