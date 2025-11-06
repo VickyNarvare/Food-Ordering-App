@@ -1,29 +1,21 @@
 # 🍽️ Foodie Delight - Food Ordering Web App
 
-A modern, responsive food ordering web application built with vanilla HTML, CSS, and JavaScript. Browse through delicious menu items, add them to your cart, place orders, and track your delivery status.
+A modern, responsive food ordering web application built with vanilla HTML, CSS, and JavaScript. Browse through delicious menu items, add them to your cart, and manage your orders.
 
 ## ✨ Features
 
 ### 🛍️ Shopping Experience
 - **Menu Browsing**: Browse through a wide variety of food items organized by categories (Pizza, Burgers, Drinks, Desserts)
-- **Search Functionality**: Quickly search for menu items by name
-- **Category Filters**: Filter menu items by food category
-- **Price Range Filter**: Filter items within your preferred price range
-- **Quick View**: View item details in a modal without leaving the page
-- **Recently Viewed**: See your recently viewed items for easy access
-- **Favorites**: Save your favorite items for quick ordering
+- **Search Functionality**: Quickly search for menu items by name or description
+- **Category Filters**: Filter menu items by food category (All, Pizza, Burgers, Drinks, Desserts)
+- **Item Details**: View item descriptions, ratings, reviews, and prices
 
-### 🛒 Cart & Checkout
+### 🛒 Cart Management
 - **Shopping Cart**: Add items to cart with quantity management
 - **Cart Side Panel**: Easy-to-use slide-out cart panel
-- **Promo Codes**: Apply discount codes to save on your orders
-  - Available codes: `SAVE10`, `SAVE20`, `FLAT400`, `FIRST`, `WEEKEND20`, `HAPPY15`
-- **Order Placement**: Smooth checkout process with order confirmation
-
-### 📦 Order Management
-- **Order History**: View all your past orders
-- **Order Tracking**: Track the status of your current orders
-- **Order Details**: View detailed information about each order
+- **Quantity Control**: Increase or decrease item quantities
+- **Remove Items**: Remove items from cart
+- **Cart Persistence**: Cart data saved in browser's LocalStorage
 
 ### 🎨 User Interface
 - **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
@@ -71,7 +63,6 @@ Food ordering web app/
 ├── track.html          # Order tracking page
 ├── style.css           # Main stylesheet
 ├── script.js           # Main JavaScript functionality & menu data
-├── features.js         # Additional features (favorites, promo codes, etc.)
 └── README.md           # This file
 ```
 
@@ -80,28 +71,22 @@ Food ordering web app/
 ### Menu Management
 - Dynamic menu rendering from JavaScript data
 - Category-based filtering
-- Price range filtering
-- Search functionality
+- Search functionality by name or description
 - Item details with ratings and reviews
 
 ### Cart Management
-- Add/remove items
-- Quantity adjustment
+- Add items to cart
+- Remove items from cart
+- Quantity adjustment (increase/decrease)
 - Price calculation
 - LocalStorage persistence
-- Cart count badge
+- Cart count badge in header
 
-### Order System
-- Order creation with unique IDs
-- Order history storage
-- Order status tracking
-- Order details view
-
-### Additional Features
-- Favorites system with localStorage
-- Recently viewed items tracking
-- Promo code validation and application
+### User Interactions
+- Smooth scrolling to menu section
+- Cart panel open/close
 - Toast notifications for user feedback
+- Responsive navigation
 
 ## 🛠️ Technologies Used
 
@@ -134,20 +119,32 @@ Edit the `menuItems` array in `script.js`:
     image: "image-url",
     rating: <rating-0-5>,
     reviews: <number-of-reviews>,
-    popularity: <popularity-score>,
     deliveryTime: "estimated-time"
 }
 ```
 
-### Adding New Promo Codes
-Edit the `promoCodes` object in `features.js`:
-
-```javascript
-'PROMOCODE': { discount: <amount>, type: 'percentage' | 'fixed' }
-```
-
 ### Styling
 Modify `style.css` to customize colors, fonts, and layout. The app uses CSS variables for easy theming.
+
+## 📝 Usage Guide
+
+### Adding Items to Cart
+1. Browse the menu on the home page
+2. Click "Add to Cart" button on any item
+3. View your cart by clicking the cart icon in the header
+4. Adjust quantities using + and - buttons
+5. Remove items using the "Remove" button
+
+### Searching and Filtering
+1. Use the search bar to find items by name or description
+2. Click category buttons (All, Pizza, Burgers, Drinks, Desserts) to filter items
+3. Search and filters work together
+
+### Managing Cart
+1. Click the cart icon in the header to open the cart panel
+2. View all items in your cart
+3. Update quantities or remove items
+4. Click "Proceed to Checkout" to go to the order page
 
 ## 📝 Notes
 
@@ -155,12 +152,18 @@ Modify `style.css` to customize colors, fonts, and layout. The app uses CSS vari
 - Fully client-side application - no backend server required
 - Images are loaded from Unsplash (external dependency)
 - The app works offline for viewing previously loaded content
+- Cart data persists across page refreshes
 
 ## 🔮 Future Enhancements
 
 Potential features for future development:
+- Order placement functionality
+- Order history and tracking
 - User authentication
 - Payment gateway integration
+- Promo codes and discounts
+- Favorites system
+- Recently viewed items
 - Restaurant admin panel
 - Reviews and ratings system
 - Multiple restaurant support
@@ -177,4 +180,3 @@ Created as a food ordering web application demo.
 ---
 
 **Enjoy your food ordering experience! 🍕🍔🥤🍰**
-
